@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class OnboardingComponents {
   String title;
   String desc;
