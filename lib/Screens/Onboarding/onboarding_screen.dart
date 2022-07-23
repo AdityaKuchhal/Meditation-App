@@ -17,12 +17,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final List<OnboardingComponents> _onBoardingPages = [
     OnboardingComponents(
       title: 'Stay Focused',
-      desc: 'Find a suitable music for yourself to stay focused more easily',
+      desc: 'To help you focus more readily, find some music that you enjoy',
       image: intro1,
     ),
     OnboardingComponents(
       title: 'Take a Deep Breath',
-      desc: 'Start your mindfulness journey with our meditation program',
+      desc: 'Start practising mindfulness with our online meditation programme',
       image: intro2,
     ),
   ];
@@ -33,31 +33,35 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: AnimatedContainer(
-        duration: const Duration(milliseconds: 800),
-        curve: Curves.easeIn,
-        child: Column(
-          children: [
-            Expanded(
-              child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 800),
-                  curve: Curves.easeIn,
-                  decoration: BoxDecoration(
-                    color: currentIndex == 0 ? kPink : kBlue,
-                    borderRadius: const BorderRadius.vertical(
-                      bottom: Radius.circular(20),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 700),
+      curve: Curves.easeIn,
+      color: currentIndex == 0 ? kBlue : kPink,
+      child: SafeArea(
+        bottom: false,
+        child: Scaffold(
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 700),
+                    curve: Curves.easeIn,
+                    decoration: BoxDecoration(
+                      color: currentIndex == 0 ? kBlue : kPink,
+                      borderRadius: const BorderRadius.vertical(
+                        bottom: Radius.circular(20),
+                      ),
                     ),
-                  ),
-                  child: _containerPageAnimation()),
-            ),
-            _indicator(),
-            _button(),
-            const SizedBox(
-              height: 50,
-            )
-          ],
+                    child: _containerPageAnimation()),
+              ),
+              _indicator(),
+              _button(),
+              const SizedBox(
+                height: 50,
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -136,7 +140,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return GestureDetector(
       onTap: () {
         if (currentIndex == 0) {
-          controller.animateToPage(1, duration: const Duration(milliseconds: 800), curve: Curves.easeIn);
+          controller.animateToPage(
+            1,
+            duration: const Duration(milliseconds: 700),
+            curve: Curves.easeIn,
+          );
         } else {
           Navigator.pushReplacement(
             context,
@@ -161,12 +169,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           color: kPrimaryColor,
         ),
         child: Center(
-          child: Text(
-            currentIndex == 0 ? 'Continue' : 'Let\'s Go',
-            style: TextStyle(
-              fontSize: MediaQuery.of(context).size.height / 40,
-              fontFamily: 'GilroyEBold',
-              color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  currentIndex == 0 ? 'Continue' : 'Let\'s Go',
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.height / 40,
+                    fontFamily: 'GilroyEBold',
+                    color: Colors.white,
+                  ),
+                ),
+                Icon(
+                  currentIndex == 0 ? Icons.arrow_circle_right_outlined : Icons.arrow_circle_right,
+                  color: Colors.white,
+                )
+              ],
             ),
           ),
         ),

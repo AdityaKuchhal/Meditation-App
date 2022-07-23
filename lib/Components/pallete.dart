@@ -7,3 +7,4 @@ const kGreen = Color(0xff05d68e);
 const kLightOrange = Color(0xfffdc478);
 const kBorderGrey = Color(0xffc7bedd);
 const kShadowColor = Color(0xffe6e6e6);
+const kBlueGrey = Color(0xff748ca4);
